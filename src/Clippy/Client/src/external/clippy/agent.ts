@@ -63,7 +63,7 @@ export class Agent {
 	 * @param {Boolean=} fast
 	 *
 	 */
-	hide(fast: boolean, callback?: () => void) {
+	hide(fast: boolean = false, callback?: () => void) {
 		this._hidden = true;
 		//let el = this._el;
 		this.stop();
@@ -115,7 +115,6 @@ export class Agent {
 			}
 
 			let callback = (name: string, state: number) => {
-				console.log('callback', name, state);
 				// when exited, complete
 				if (state === Animator.States.EXITED) {
 					complete();
@@ -161,7 +160,6 @@ export class Agent {
 			let completed = false;
 			// handle callback
 			let callback = function (name: string, state: number) {
-				console.log('callback2', name, state);
 				if (state === Animator.States.EXITED) {
 					completed = true;
 					if (cb) cb();
