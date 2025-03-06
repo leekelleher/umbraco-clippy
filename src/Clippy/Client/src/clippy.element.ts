@@ -29,9 +29,6 @@ export class UmbClippyElement extends UmbLitElement {
 				position: absolute;
 				bottom: var(--uui-size-layout-4, 64px);
 				right: var(--uui-size-layout-1, 24px);
-
-				height: 100px;
-				width: 125px;
 			}
 
 			.clippy-balloon {

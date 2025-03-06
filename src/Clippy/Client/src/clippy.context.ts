@@ -39,4 +39,4 @@ export default UmbClippyContext;
 
 export { UmbClippyContext as api };
 
-export const UMB_CLIPPY_CONTEXT = new UmbContextToken<UmbClippyContext>('umbClippyContext');
+export const UMB_CLIPPY_CONTEXT = new UmbContextToken<UmbClippyContext>('UmbClippyContext');

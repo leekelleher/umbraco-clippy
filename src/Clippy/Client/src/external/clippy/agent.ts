@@ -10,9 +10,10 @@ export interface AgentOptions {
 
 export class Agent {
 	private _queue: Queue;
-	public readonly _el: HTMLElement;
-	private _animator: Animator;
-	private _balloon: Balloon;
+	public _el!: HTMLElement; // TODO: [LK] Make this type safe!
+	private _agent: AgentWrapper;
+	private _animator!: Animator; // TODO: [LK] Make this type safe!
+	private _balloon!: Balloon; // TODO: [LK] Make this type safe!
 	private _hidden: boolean = false;
 	private _idleDfd?: Deferred;
 	private _offset: { top: number; left: number } = { top: 0, left: 0 };
@@ -25,23 +26,26 @@ export class Agent {
 	constructor(options: AgentOptions) {
 		const { agent } = options;
 
+		this._agent = agent;
 		this._queue = new Queue(this._onQueueEmpty.bind(this));
+	}
+
+	attachTo(element: Element) {
+		if (!element) return;
 
 		const el = document.createElement('div');
 		el.className = 'clippy';
 		el.setAttribute('hidden', 'true');
 		this._el = el;
 
-		const agentSounds: string[] = Object.values(options.agent.soundMp3 as unknown as Array<string>);
-
-		this._animator = new Animator(this._el, agent, agentSounds);
-		this._balloon = new Balloon(this._el);
-		this._setupEvents();
-	}
-
-	attachTo(element: Element) {
-		if (!element || !this._el) return;
 		element.appendChild(this._el);
+
+		const agentSounds: string[] = Object.values(this._agent.soundMp3 as unknown as Array<string>);
+		this._animator = new Animator(this._el, this._agent, agentSounds);
+
+		this._balloon = new Balloon(this._el);
+
+		this._setupEvents();
 	}
 
 	/***
@@ -114,6 +118,7 @@ export class Agent {
 				return;
 			}
 
+			// @ts-ignore
 			let callback = (name: string, state: number) => {
 				// when exited, complete
 				if (state === Animator.States.EXITED) {
