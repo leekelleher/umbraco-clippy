@@ -356,3 +356,4 @@ MigrationBackup/
 src/.idea
 *.cmd
 .vscode
+/src/Clippy/wwwroot/App_Plugins/*
