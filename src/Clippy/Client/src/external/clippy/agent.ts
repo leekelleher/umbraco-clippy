@@ -164,6 +164,7 @@ export class Agent {
 		this._addToQueue((complete: Function) => {
 			let completed = false;
 			// handle callback
+			//@ts-ignore
 			let callback = function (name: string, state: number) {
 				if (state === Animator.States.EXITED) {
 					completed = true;

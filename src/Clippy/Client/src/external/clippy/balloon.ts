@@ -67,8 +67,8 @@ export default class Balloon {
 		o.top -= sT;
 		o.left -= sL;
 
-		let bH = getHeight(this._balloon, 'outer')!;
-		let bW = getWidth(this._balloon, 'outer')!;
+		let bH = getHeight(this._balloon, 'outer')! + 100;
+		let bW = getWidth(this._balloon, 'outer')! + 100;
 
 		this._balloon.classList.remove('clippy-top-left');
 		this._balloon.classList.remove('clippy-top-right');
